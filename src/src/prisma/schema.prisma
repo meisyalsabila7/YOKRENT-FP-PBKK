@@ -1,0 +1,97 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Customer {
+  Cust_ID         String      @id @default(cuid()) @unique
+  Cust_Email      String
+  Cust_Username   String
+  Cust_Password   String
+  Cust_Nama       String
+  Cust_Alamat     String
+  Cust_NoTelp     String
+  Cust_FotoProfil String?
+  Penyewaan       Penyewaan[]
+
+  @@map("customer")
+}
+
+model Administrator {
+  Adm_ID       String      @id @default(cuid()) @unique
+  Adm_Email    String
+  Adm_Password String
+  Adm_Nama     String
+  Mobil        Mobil[]
+  Penyewaan    Penyewaan[]
+
+  @@map("administrator")
+}
+
+model Mobil {
+  Mobil_ID             String        @id @default(cuid()) @unique
+  Adm_ID               String
+  Mobil_Nama           String
+  Mobil_Merk           String
+  Mobil_Jenis          String
+  Mobil_HargaPenyewaan Int
+  Mobil_Warna          String
+  Mobil_PlatNomor      String
+  Mobil_Kapasitas      Int
+  Mobil_Status         String?
+  Mobil_Foto           String
+  Admin                Administrator @relation(fields: [Adm_ID], references: [Adm_ID])
+  Rating               Rating[]
+  Penyewaan            Penyewaan[]
+
+  @@map("mobil")
+}
+
+model Rating {
+  Rating_ID     String    @id @default(cuid()) @unique
+  Rating_Nilai  Int
+  Rating_Review String?
+  Penyewaan_ID  String
+  Mobil_ID      String
+  Mobil         Mobil     @relation(fields: [Mobil_ID], references: [Mobil_ID])
+  Penyewaan     Penyewaan @relation(fields: [Penyewaan_ID], references: [Penyewaan_ID])
+
+  @@map("rating")
+}
+
+model Penyewaan {
+  Penyewaan_ID                  String        @id @default(cuid()) @unique
+  Penyewaan_Tanggal             DateTime
+  Penyewaan_Durasi              Int
+  Penyewaan_TanggalPengembalian DateTime
+  Penyewaan_Status              String
+  Cust_ID                       String
+  Adm_ID                        String
+  Mobil_ID                      String
+  Penyewaan_Total               Int?
+  Pembayaran                    Pembayaran[]
+  Admin                         Administrator @relation(fields: [Adm_ID], references: [Adm_ID])
+  Mobil                         Mobil         @relation(fields: [Mobil_ID], references: [Mobil_ID])
+  Customer                      Customer      @relation(fields: [Cust_ID], references: [Cust_ID])
+  Rating                        Rating[]
+
+  @@map("penyewaan")
+}
+
+model Pembayaran {
+  Pembayaran_ID      String    @id @default(cuid()) @unique
+  Pembayaran_Tanggal DateTime
+  Pembayaran_Total   Int
+  Pembayaran_Status  String
+  Penyewaan_ID       String
+  Penyewaan          Penyewaan @relation(fields: [Penyewaan_ID], references: [Penyewaan_ID])
+
+  @@map("pembayaran")
+}
