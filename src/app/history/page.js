@@ -1,6 +1,6 @@
 "use client";
 
-import DetailMobil from "../components/detail-mobil";
+import DetailMobil from "../../components/detail-mobil";
 import mc from "../../../public/assets/mc.png";
 import Image from "next/image";
 import React from "react";

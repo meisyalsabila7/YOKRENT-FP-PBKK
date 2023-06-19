@@ -1,4 +1,4 @@
-import Recommendation from "@/components/recommendation";
+import Recommendation from "../../components/recommendation";
 import accord from "../../../public/assets/mobil/accord.png";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";

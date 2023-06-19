@@ -1,6 +1,6 @@
 "use client";
-import DetailMobil from "@/components/detail-mobil";
-import Recommendation from "@/components/recommendation";
+import DetailMobil from "../../components/detail-mobil";
+import Recommendation from "../../components/recommendation";
 import { FaCarSide } from "react-icons/fa";
 import { FiLoader, FiChevronUp, FiChevronDown } from "react-icons/fi";
 import { BsCheckCircleFill } from "react-icons/bs";

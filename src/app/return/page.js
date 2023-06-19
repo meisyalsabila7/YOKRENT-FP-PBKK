@@ -1,10 +1,10 @@
 "use client";
-import DetailMobil from "@/components/detail-mobil";
-import Rincian from "@/components/rincian";
+import DetailMobil from "../../components/detail-mobil";
+import Rincian from "../../components/rincian";
 import mc from "../../../public/assets/mc.png";
 import Image from "next/image";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import CustomInput from "@/components/input";
+import CustomInput from "../../components/input";
 import React from "react";
 import Link from "next/link";
 export default function Page() {
