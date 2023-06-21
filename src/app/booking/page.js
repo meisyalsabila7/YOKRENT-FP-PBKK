@@ -5,23 +5,23 @@ import CustomInput from "../../components/input";
 import Rincian from "../../components/rincian";
 import Link from "next/link";
 
-const [email, setEmail] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [nama, setNama] = useState("");
-  const [username, setUsername] = useState("");
-  const [alamat, setAlamat] = useState("");
-  const [password, setPassword] = useState("");
+// const [email, setEmail] = useState("");
+//   const [telephone, setTelephone] = useState("");
+//   const [nama, setNama] = useState("");
+//   const [username, setUsername] = useState("");
+//   const [alamat, setAlamat] = useState("");
+//   const [password, setPassword] = useState("");
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log(email, telephone, password);
-    const jsonForm = JSON.stringify({ email: email, telephone: telephone, password: password, nama: nama, username: username, alamat: alamat })
-    const response = await fetch('http://localhost:3000/api/auth/register', { method: 'POST', body: jsonForm });
-    const responseJson = await response.json();
-    console.log(responseJson);
+//   const handleSubmit = async (e) => {
+//     e.preventDefault()
+//     console.log(email, telephone, password);
+//     const jsonForm = JSON.stringify({ email: email, telephone: telephone, password: password, nama: nama, username: username, alamat: alamat })
+//     const response = await fetch('http://localhost:3000/api/auth/register', { method: 'POST', body: jsonForm });
+//     const responseJson = await response.json();
+//     console.log(responseJson);
 
-  }
+//   }
 
 export default function Page() {
   const [shippingValue, setShippingValue] = React.useState(0);
