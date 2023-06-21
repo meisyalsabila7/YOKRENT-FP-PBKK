@@ -1,7 +1,7 @@
 "use client";
-import DialogDetail from "@/components/dialog/dialog-detail-mobil";
-import Table from "@/components/table";
-import { mobilData } from "@/utils/data";
+import DialogDetail from "../../../../components/dialog/dialog-detail-mobil";
+import Table from "../../../../components/table";
+import { mobilData } from "../../../../utils/data";
 import React from "react";
 export default function Page() {
   const [show, setShow] = React.useState(false);

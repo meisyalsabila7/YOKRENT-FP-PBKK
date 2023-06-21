@@ -1,8 +1,8 @@
 "use client";
-import DialogKonfirmasi from "@/components/dialog/dialog-konfirmasi";
+import DialogKonfirmasi from "../../../../components/dialog/dialog-konfirmasi";
 
-import Table from "@/components/table";
-import { sewaData } from "@/utils/data";
+import Table from "../../../../components/table";
+import { sewaData } from "../../../../utils/data";
 import React from "react";
 export default function Page() {
   const [show, setShow] = React.useState(false);

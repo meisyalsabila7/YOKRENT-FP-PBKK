@@ -1,4 +1,4 @@
-import CustomInput from "@/components/input";
+import CustomInput from "../../../../../components/input";
 import React from "react";
 
 export default function Page() {

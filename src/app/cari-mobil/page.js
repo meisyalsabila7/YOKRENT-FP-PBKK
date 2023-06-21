@@ -21,7 +21,12 @@ import React from "react";
 import { FiUsers, FiSettings, FiCalendar } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+
 import { getSession, useSession } from "next-auth/react";
+// import { PrismaClient } from "@prisma/client";
+
+// const prisma = new PrismaClient();
+
 const dataMobil = [
   {
     url: accord,
@@ -128,8 +133,7 @@ export default function Page() {
       setShowList(true);
     }
   };  
-  const { data: session, status } = useSession()
-  console.log(session);
+  // const cars = props.cars;
 
   return (
     <>
@@ -244,26 +248,40 @@ export default function Page() {
                   </div>
                 </Link>
               </div>
-            ))}
+            ))
+          }
+          {/* <ul> 
+            {Cars.map(Cars => (
+              <li key={Cars.Mobil_ID}>{Cars.Mobil_Nama}</li>
+              ))}
+          </ul> */}
         </div>
       )}
     </>
   );
 }
 
+// export async function getServerSideProps() {
+//   const allCars = await prisma.Mobil.findMany();
+//   return {
+//     props: {
+//       cars: allCars,
+//     },
+//   };
+// }
 
 // export async function getServerSideProps() {
 
-  // const { data: session } = useSession()
-  // console.log(session);
-  // const session = await getSession(context);
-  // console.log(session);
-  // if (!session) {
-    //if not exists, return a temporary 302 and replace the url with the given in Location.
-    // context.res.writeHead(302, { Location: "/signin" });
-    // context.res.end();
+//   const { data: session } = useSession()
+//   console.log(session);
+//   const session = await getSession(context);
+//   console.log(session);
+//   if (!session) {
+//     if not exists, return a temporary 302 and replace the url with the given in Location.
+//     context.res.writeHead(302, { Location: "/signin" });
+//     context.res.end();
 
-    //do not return any session.
-  //   return { props: {} };
-  // }
+//     do not return any session.
+//     return { props: {} };
+//   }
 // }

@@ -1,30 +1,32 @@
-"use client";
+'use client';
 import React from "react";
 import DetailMobil from "../../components/detail-mobil";
 import CustomInput from "../../components/input";
 import Rincian from "../../components/rincian";
+import DatePicker from "../../components/date-picker";
 import Link from "next/link";
-
-// const [email, setEmail] = useState("");
-//   const [telephone, setTelephone] = useState("");
-//   const [nama, setNama] = useState("");
-//   const [username, setUsername] = useState("");
-//   const [alamat, setAlamat] = useState("");
-//   const [password, setPassword] = useState("");
-
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault()
-//     console.log(email, telephone, password);
-//     const jsonForm = JSON.stringify({ email: email, telephone: telephone, password: password, nama: nama, username: username, alamat: alamat })
-//     const response = await fetch('http://localhost:3000/api/auth/register', { method: 'POST', body: jsonForm });
-//     const responseJson = await response.json();
-//     console.log(responseJson);
-
-//   }
+import { useState } from "react";
 
 export default function Page() {
+  
   const [shippingValue, setShippingValue] = React.useState(0);
+  const [startDate, setStartDate] = useState(new Date());
+  // const [endDate, setEndDate] = useState(new Date());
+  const [duration, setDuration] = useState('');
+
+  const handleChange = event => {
+    setDuration(event.target.duration);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(startDate, duration);
+    const jsonForm = JSON.stringify({ tanggalAmbil: startDate, durasi: duration });
+    const response = await fetch('http://localhost:3000/api/penyewaan', { method: 'POST', body: jsonForm });
+    const responseJson = await response.json();
+    console.log(responseJson);
+  }
+  
   return (
     <div className="max-w-screen-xl mx-auto">
       <div className="flex md:flex-row flex-col-reverse justify-center py-9 gap-8">
@@ -32,9 +34,53 @@ export default function Page() {
           <div className="rounded-lg shadow-md border  ">
             <DetailMobil hide={true} />
             {/* detail pesanan */}
+            <form onSubmit={handleSubmit}>
             <div className="border rounded border-[#E7E7E7] flex flex-col gap-4 p-8 m-4">
               <h1 className="font-bold text-xl">Detail pesanan</h1>
-              <p>Seperti tertera pada SIM</p>
+              
+                <h3>Tanggal mulai penyewaan</h3>
+                {/* <label for="startdate">Start Date:</label>
+                <input
+                  type="date"
+                  name="startdate"
+                  min={new Date().toISOString().split("T")[0]}
+                  onChange={handleChange}
+                  required
+                />
+                <label for="enddate">End Date:</label>
+                <input
+                  type="date"
+                  name="enddate"
+                  disabled={startDate === "" ? true: false}
+                  min={startDate ? new Date(startDate).toISOString().split("T")[0]: ""}
+                  onChange={handleChange}
+                  required
+                /> */}
+                <DatePicker
+                  selected={startDate}
+                  onChange={date => setStartDate(date)}
+                />
+                <h3>Durasi penyewaan</h3>
+                <input
+                  type="number"
+                  value={duration}
+                  onChange={handleChange}
+                />
+            </div>
+            <div className="w-full grid justify-center">
+              <Link href="/activity">
+                <button
+                  type="submit"
+                  className="bg-[#5CB85F] rounded py-3 px-8 text-white my-4"
+                >
+                  Pesan sekarang
+                </button>
+              </Link>
+            </div>
+            </form>
+          </div>
+        </div>
+              {/* <p>Seperti tertera pada SIM</p>
 
               <CustomInput
                 type="email"
@@ -70,9 +116,9 @@ export default function Page() {
                 placeholder=""
                 label="Nomor HP"
               />
-            </div>
+            </div> */}
             {/* pilih pengiriman */}
-            <div className="border rounded border-[#E7E7E7] flex flex-col gap-4 p-8 m-4">
+            {/* <div className="border rounded border-[#E7E7E7] flex flex-col gap-4 p-8 m-4">
               <h1 className="font-bold text-xl">Pilihan pengiriman</h1>
               <div className="flex gap-4 w-full">
                 <div className="flex justify-center gap-2">
@@ -96,9 +142,9 @@ export default function Page() {
                   <label htmlFor="shipping-2">Antar ke tempat anda</label>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* alamat pengiriman */}
-            {shippingValue === 1 && (
+            {/* {shippingValue === 1 && (
               <div className="border rounded border-[#E7E7E7] flex flex-col gap-4 p-8 m-4">
                 <h1 className="font-bold text-xl">Alamat pengantaran</h1>
                 <CustomInput
@@ -126,9 +172,9 @@ export default function Page() {
                   </label>
                 </div>
               </div>
-            )}
+            )} */}
             {/* jaminan */}
-            <div className="border rounded border-[#E7E7E7] flex flex-col gap-4 p-8 m-4">
+            {/* <div className="border rounded border-[#E7E7E7] flex flex-col gap-4 p-8 m-4">
               <h1 className="font-bold text-xl">Pilihan Jaminan</h1>
               <div className="flex gap-4">
                 <div className="flex justify-center gap-2">
@@ -162,8 +208,8 @@ export default function Page() {
                 Pesan sekarang
               </button>
             </Link>
-          </div>
-        </div>
+          </div> 
+        </div> */}
         <div className="w-full lg:w-2/5">
           <Rincian />
         </div>
